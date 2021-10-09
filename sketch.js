@@ -1,51 +1,70 @@
 //Create variables here
-var dog,dogIMG,dog2IMG,database, foodS, foodStock;
+var dog;
+var dogImage, happyDogImage;
+
+var foodS, foodStock;
+
+var database;
 
 function preload()
 {
-  //load images here
-  dogIMG=loadImage("Dog.png");
-  dog2IMG=loadImage("happydog.png")
+  dogImage = loadImage("images/dogImg.png")
+
+  happyDogImage = loadImage("images/dogImg1.png");
 }
 
 function setup() {
-  createCanvas(500,500);
+  createCanvas(500, 500);
+
+  database = firebase.database();
   
-database = firebase.database();
-console.log(database);
+  dog = createSprite(250, 325, 20, 20);
+  dog.addImage(dogImage);
+  dog.scale = 0.25;
 
-  dog=createSprite(250,250,10,20);
-  dog.addImage(dogIMG );
-  dog.scale=0.2;
-
-  var foodStock=database.ref("Food");
-  foodStock.on("value",readStock);
+  foodStock = database.ref("food");
+  foodStock.on("value", readStock);
   
 }
 
 
 function draw() {  
-background(rgb(46, 139, 87));
+  background(46, 139, 87);
 
-if (keyWentDown("UP_ARROW")){
-  writeStock(foodS)
-  dog.addImage(dog2IMG);
-}
-stroke('yellow')
-text("Note:Press Up arrow key to feed the dog",150,150)
-  drawSprites();
-  //add styles here
-
-}
-
-function readStock(data){
-  foodS=data.val;
-}
-
-
-function writeStock(x){
-  database.ref('/').update({
-   Food:x
+  if(keyWentDown(UP_ARROW)) {
+    writeStock(foodS);
+    dog.addImage(happyDogImage);
   }
-  )
+
+  if(keyWentUp(UP_ARROW)) {
+    dog.addImage(dogImage);
+  }
+
+  textSize(24);
+  fill("snow");
+  text("Press the Up Arrow Key to Feed the Dog!",  30, 90);
+
+  textSize(20);
+  text("Food Left: " + foodS, 30, 40);
+
+  drawSprites();
+}
+
+//Function to read the values from DB and assign to variable foodS
+function readStock(data) {
+  foodS = data.val();
+}
+
+//Function to write to values from DB and update them
+function writeStock(food) {
+  if(food == 0) {
+    food = 20;
+  }
+  else {
+    food-=1;
+  }
+
+  database.ref('/').update({
+    food: food
+  });
 }
