@@ -15,18 +15,23 @@
       <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-database.js"></script>
 
       <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-          apiKey: "AIzaSyBz5B3g-VWVCyn58Z26tHK3fQd-FSjXjsE",
-          authDomain: "virtual-pet-c59ec.firebaseapp.com",
-          databaseURL: "https://virtual-pet-c59ec-default-rtdb.firebaseio.com",
-          projectId: "virtual-pet-c59ec",
-          storageBucket: "virtual-pet-c59ec.appspot.com",
-          messagingSenderId: "845716626229",
-          appId: "1:845716626229:web:baf4a1f9f3468b2fb04a7c"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+      // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDvBrRQ2B_J2YsCMYHbp4M4psK23kMYGak",
+  authDomain: "bedtime-stories-b79e0.firebaseapp.com",
+  projectId: "bedtime-stories-b79e0",
+  storageBucket: "bedtime-stories-b79e0.appspot.com",
+  messagingSenderId: "619236555334",
+  appId: "1:619236555334:web:b74522f93c15a90b2e6847"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
       </script>
 
       <link rel="stylesheet" type="text/css" href="style.css"/>
